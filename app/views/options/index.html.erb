@@ -1,0 +1,26 @@
+<h1>Listing options</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Subtype</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @options.each do |option| %>
+  <tr>
+    <td><%= option.name %></td>
+    <td><%= option.subtype.name %></td>
+    <td><%= link_to 'Show', [option.subtype, option] %></td>
+    <td><%= link_to 'Edit', edit_subtype_option_path(option.subtype, option) %></td>
+    <td><%= link_to 'Destroy', [option.subtype, option], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Option', new_subtype_option_path(params[:subtype_id]) %> |
+<%= link_to 'All Subtypes', subtypes_path %>

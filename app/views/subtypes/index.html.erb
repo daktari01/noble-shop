@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Subtypes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @subtypes.each do |subtype| %>
+      <tr>
+        <td><strong><%= subtype.name %></strong></td>
+        <td><%= link_to 'Show', subtype %></td>
+        <td><%= link_to 'Edit', edit_subtype_path(subtype) %></td>
+        <td><%= link_to 'Destroy', subtype, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+      <%Option.where(subtype_id: subtype.id).each do |option|%>
+        <tr>
+          <td><%= option.name %></td>
+        </tr>
+      <% end %>
+      <tr>
+        <td><%= link_to 'Add Option', new_subtype_option_path(subtype.id) %></td>
+        <td><%= link_to 'All Options', subtype_options_path(subtype.id) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Subtype', new_subtype_path %>

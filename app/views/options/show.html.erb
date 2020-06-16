@@ -1,0 +1,16 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @option.name %>
+</p>
+
+<p>
+  <b>Subtype:</b>
+  <%= @option.subtype.name %>
+</p>
+
+
+<%= link_to 'All Subtypes', subtypes_path %> |
+<%= link_to 'Edit', edit_subtype_option_path(@option.subtype, @option) %> |
+<%= link_to 'Back', subtype_options_path(@option.subtype) %>

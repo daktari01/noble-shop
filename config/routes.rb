@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :subtypes do
+    resources :options
+  end
   resources :categories do
     resources :products
   end
