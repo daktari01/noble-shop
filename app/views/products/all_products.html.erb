@@ -1,0 +1,31 @@
+<h1>All Products</h1>
+
+<% Category.all.each do |category| %>
+  <h2><%= category.name %></h2>
+  <h3>Total Units: <%= @all_products.where(category_id: category.id).map{|p| p.quantity}.inject(0, :+) %></h3>
+  <table>
+    <tr>
+      <th>Subtype</th>
+      <th>Price</th>
+      <th>Quantity</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  
+  <% @all_products.where(category_id: category.id).each do |product| %>
+    <tr>
+      <td><%= product.subtype %></td>
+      <td><%= product.price %></td>
+      <td><%= product.quantity %></td>
+    </tr>
+  <% end %>
+  </table>
+  
+  <br />
+<% end %>
+
+<%= link_to 'New Category', new_category_path %> |
+<%= link_to 'All Categories', categories_path %>
+
+

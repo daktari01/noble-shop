@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Subtype:</b>
+  <%= @product.subtype %>
+</p>
+
+<p>
+  <b>Price:</b>
+  <%= @product.price %>
+</p>
+
+<p>
+  <b>Quantity:</b>
+  <%= @product.quantity %>
+</p>
+
+<p>
+  <b>Category:</b>
+  <%= @product.category.name %>
+</p>
+
+
+<%= link_to 'Edit', edit_category_product_path(@product.category, @product) %> |
+<%= link_to 'Back', category_products_path(@product.category) %>
