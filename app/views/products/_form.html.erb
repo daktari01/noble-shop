@@ -11,10 +11,18 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :subtype %><br />
-    <%= f.text_field :subtype %>
-  </div>
+  <p>
+    <% Subtype.all.each do |subtype| %>
+      <strong>Select the <%= subtype.name %></strong><br />
+      <% Option.where(subtype_id: subtype.id).each do |option| %>
+        <%= radio_button_tag "subtypes[#{subtype.name}]", "#{option.name}" %> <%= option.name %><br />
+      <% end %>
+      <%= link_to "Add Option", new_subtype_option_path(subtype.id) %>
+      <br /><br />
+    <% end %>
+    <%= link_to "Add Subtype", new_subtype_path %>
+  </p>
+
   <div class="field">
     <%= f.label :price %><br />
     <%= f.text_field :price %>

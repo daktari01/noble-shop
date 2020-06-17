@@ -23,7 +23,10 @@ class ProductsController < ApplicationController
   # POST categories/1/products
   def create
     @product = @category.products.build(product_params)
-
+    subtypes = ''
+    params[:subtypes].each {|k, v| subtypes << "#{k}: #{v}, "}
+    @product.subtype = subtypes.strip.chop
+    # binding.pry
     if @product.save
       redirect_to([@product.category, @product], notice: 'Product was successfully created.')
     else
