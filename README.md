@@ -9,9 +9,10 @@ Ruby on Rails
 ## Installation
 1. Clone the repo by running `git clone git@github.com:daktari01/noble-shop.git` for SSH or `git clone https://github.com/daktari01/noble-shop.git` for HTTPS
 2. Install the dependencies by running `bundle install`
-3. Run the tests `bundle exec rspec`
-4. Start the server by running `rails server`
-5. Go to `http://localhost:3000/products` for the homepage.
+3. Set up the database by running `rails db:setup`
+4. Run the tests `bundle exec rspec`
+5. Start the server by running `rails server`
+6. Go to `http://localhost:3000/products` for the homepage.
 
 ## Licence
 Copyright ©2020 @daktari01
