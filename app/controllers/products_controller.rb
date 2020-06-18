@@ -25,7 +25,9 @@ class ProductsController < ApplicationController
     # binding.pry
     @product = @category.products.build(product_params)
     subtypes = ''
-    params[:subtypes].each {|k, v| subtypes << "#{k}: #{v}, "}
+    if params[:subtypes]
+      params[:subtypes].each {|k, v| subtypes << "#{k}: #{v}, "}
+    end
     @product.subtype = subtypes.strip.chop
     if @product.save
       redirect_to([@product.category, @product], notice: 'Product was successfully created.')
