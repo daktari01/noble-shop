@@ -1,4 +1,4 @@
-<h1>Listing options</h1>
+<h1><% if @options.any? %><%= @options.first.subtype.name.capitalize %><% else %>Listing<% end %> options</h1>
 
 <table>
   <tr>

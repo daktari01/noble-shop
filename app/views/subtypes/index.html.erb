@@ -2,36 +2,46 @@
 
 <h1>Subtypes</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @subtypes.each do |subtype| %>
+<% if !@subtypes.empty? %>
+  <table>
+    <thead>
       <tr>
-        <td><strong><%= subtype.name %></strong></td>
-        <td><%= link_to 'Show', subtype %></td>
-        <td><%= link_to 'Edit', edit_subtype_path(subtype) %></td>
-        <td><%= link_to 'Destroy', subtype, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th></th>
+        <th colspan="3"></th>
       </tr>
-      <%Option.where(subtype_id: subtype.id).each do |option|%>
+    </thead>
+
+    <tbody>
+      <% @subtypes.each do |subtype| %>
+
         <tr>
-          <td><%= option.name %></td>
+          <td><strong><%= subtype.name %></strong></td>
+          <td><%= link_to 'Show', subtype %></td>
+          <td><%= link_to 'Edit', edit_subtype_path(subtype) %></td>
+          <td><%= link_to 'Destroy', subtype, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+        <tr>
+          <% if !Option.where(subtype_id: subtype.id).empty? %>
+            <% Option.where(subtype_id: subtype.id).each do |option| %>
+              <tr>
+                <td><%= option.name %></td>
+              </tr>
+            <% end %>
+          <% else %>
+            <td>There are no options</td>
+          <% end %>
+        </tr>
+        <tr>
+          <td><%= link_to 'Add Option', new_subtype_option_path(subtype.id) %></td>
+          <td><%= link_to 'All Options', subtype_options_path(subtype.id) %></td>
         </tr>
       <% end %>
-      <tr>
-        <td><%= link_to 'Add Option', new_subtype_option_path(subtype.id) %></td>
-        <td><%= link_to 'All Options', subtype_options_path(subtype.id) %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+    </tbody>
+  </table>
 
-<br>
-
+  <br>
+<% else %>
+  <p>There are no subtypes</p>
+<% end %>
 <%= link_to 'Add Subtype', new_subtype_path %> |
 <%= link_to 'All Products', products_path %>

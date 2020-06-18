@@ -1,34 +1,42 @@
 <h1>All Products</h1>
 
-<% Category.all.each do |category| %>
-  <h2><%= category.name %></h2>
-  <h3>Total Units: <%= @all_products.where(category_id: category.id).map{|p| p.quantity}.inject(0, :+) %></h3>
-  <table>
-    <tr>
-      <th>Subtype</th>
-      <th>Price</th>
-      <th>Quantity</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  
-  <% @all_products.where(category_id: category.id).each do |product| %>
-    <tr>
-      <td><%= product.subtype %></td>
-      <td><%= product.price %></td>
-      <td><%= product.quantity %></td>
-      <td><%= link_to 'Show', [product.category, product] %></td>
-      <td><%= link_to 'Edit', edit_category_product_path(product.category, product) %></td>
-      <td><%= link_to 'Destroy', [product.category, product], method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    </tr>
+<% if !Category.all.empty? %>
+  <% Category.all.each do |category| %>
+    <h2><%= category.name %></h2>
+    <% if !@all_products.where(category_id: category.id).empty? %>
+      <h3>Total Units: <%= @all_products.where(category_id: category.id).map{|p| p.quantity}.inject(0, :+) %></h3>
+      <table>
+        <tr>
+          <th>Subtype</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      
+      <% @all_products.where(category_id: category.id).each do |product| %>
+        <tr>
+          <td><%= product.subtype %></td>
+          <td><%= product.price %></td>
+          <td><%= product.quantity %></td>
+          <td><%= link_to 'Show', [product.category, product] %></td>
+          <td><%= link_to 'Edit', edit_category_product_path(product.category, product) %></td>
+          <td><%= link_to 'Destroy', [product.category, product], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    <% else %>
+      <p>There are no products.</p>
+    <% end %>
+      <tr>
+        <td><%= link_to 'Add Product', new_category_product_path(category.id) %></td>
+      </tr>
+    </table>
+    
+    <br />
   <% end %>
-    <tr>
-      <td><%= link_to 'Add Product', new_category_product_path(category.id) %></td>
-    </tr>
-  </table>
-  
-  <br />
+<% else %>
+    <p>There are no Categories.</p>
 <% end %>
 
 <%= link_to 'Add Category', new_category_path %> |
